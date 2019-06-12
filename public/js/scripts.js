@@ -22,7 +22,10 @@ function hideBear(){
 
 function displayBear(){
     document.querySelector('#ye-bear').style.display = 'initial';
-    document.querySelector('#ye-bear').style.opacity = 1;
+    document.querySelector('#ye-bear').style.opacity = 0;
+    setTimeout(function(){
+        document.querySelector('#ye-bear').style.opacity = 1;
+    }, 500);
 };
 
 function displayIntro(){
@@ -75,20 +78,20 @@ function playGame(){
     let gameInterface = document.querySelector('.game-interface');
     //disable restart button, it is hidden now and will be enable at end of game (bottom of scoreboard)
     document.querySelector('.restart-button').disabled = true;
-    gameInterface.style.opacity = 1;
+    //shows bear
     displayBear();
+    //waits 1 second to show game interface to let bear become visible first
+    setTimeout(function(){
+        gameInterface.style.opacity = 1;
+    }, 1000);
     let selectedButton;
-    buttons = (document.getElementsByClassName('selection-btn'));
-            
+    buttons = (document.getElementsByClassName('selection-btn'));          
     for (i = 0; i < 3; ++i){
         buttons[i].addEventListener('click', function(){
-
             //disable buttons
             disableBtns();
-
             //fade out scoreboard
             document.querySelector('.scoreboard').style.opacity = 0;
-
             //set user's selected move and computer's move
             selectedButton = this.innerHTML;
             computerSelection = computerPlay();
@@ -139,10 +142,8 @@ function displayCounter(){
 
 function playRound(playerSelection, computerSelection){
     let announce;
-
     //show and then hide counter
     displayCounter();
-
     if (playerSelection === 'Rock' && computerSelection === 'Scissors'){
         announce = 'You Win! Rock is wavier than Scissors';
         userScore++;
@@ -170,11 +171,9 @@ function playRound(playerSelection, computerSelection){
     else if (playerSelection === computerSelection){
         announce = 'Tie! ' + playerSelection + ' and ' + computerSelection + '. Equally wavy';
     }
-
     //end game when user's or computer's score reaches 3
     if (userScore === 3){
         announce = 'You win the game! ' + userScore + ' rounds to ' + compScore + '. You\'re ultra wavy';
-
         // disable buttons and display button for game restart after 5 seconds (when timer is complete and scoreboard is visible)
         setTimeout(function(){
             disableBtns();
@@ -183,14 +182,12 @@ function playRound(playerSelection, computerSelection){
     }
     if (compScore === 3){
         announce = 'You lose the game! ' + userScore + ' round(s) to ' + compScore + '. Computer Yeezus is too wavy for you!';
-
         // disable buttons and display button for game restart after 5 seconds (when timer is complete and scoreboard is visible)
         setTimeout(function(){
             disableBtns();
             displayNewGameBtn();
         },5000)
     }
-
     //fade in scoreboard after 5 seconds
     setTimeout(function(){
         document.querySelector('.round-outcome').innerHTML = announce;
