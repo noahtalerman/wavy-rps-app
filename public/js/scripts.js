@@ -195,7 +195,6 @@ function playRound(playerSelection, computerSelection){
         document.querySelector('.ye-score').innerHTML = `Ye's score: ${compScore}`;
         document.querySelector('.scoreboard').style.opacity = 1;
     },5000);
-
     return;
 }
 
