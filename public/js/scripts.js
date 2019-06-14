@@ -2,14 +2,6 @@
 let userScore = 0;
 let compScore = 0;
 
-hideBear();
-setTimeout(function () {
-    displayIntro();
-}, 3000);
-setTimeout(function () {
-    playGame();
-}, 21000);
-
 function hideBear() {
     setTimeout(function () {
         document.querySelector('#ye-bear').style.opacity = 0;
@@ -70,37 +62,32 @@ function displayIntro(){
     }, 16500);
 }
 
-function playGame(){
-    const gameInterface = document.querySelector('.game-interface');
-    // disable restart button, it is hidden now and will be enable at end of game (bottom of scoreboard)
-    document.querySelector('.restart-button').disabled = true;
-    //shows bear
-    displayBear();
-    // waits 1 second to show game interface to let bear become visible first
-    setTimeout(function(){
-        gameInterface.style.opacity = 1;
-    }, 1000);
-    let selectedButton;
-    let buttons = (document.getElementsByClassName('selection-btn'));          
-    for (let i = 0; i < 3; ++i) {
-        buttons[i].addEventListener('click', function(){
-            // disable buttons
-            disableBtns();
-            // fade out scoreboard
-            document.querySelector('.scoreboard').style.opacity = 0;
-            // set user's selected move and computer's move
-            selectedButton = this.innerHTML;
-            let computerSelection = computerPlay();
-            playRound(selectedButton,computerSelection);
-        });
-    }
+function darkenButton(button) {
+    button.style.opacity = 0.5;
+    button.style.cursor = 'default';
+    button.disabled = true;
 }
 
-function computerPlay(){
-    // selects random play choice for computer
-    let choiceArray = ["Rock", "Paper", "Scissors"];
-    let randomChoice = choiceArray[Math.floor(Math.random() * choiceArray.length)];
-    return randomChoice;
+function lightenButton(button) {
+    button.style.opacity = 1;
+    button.style.cursor = 'pointer';
+    button.disabled = false;
+}
+
+function disableBtns() {
+    const header = document.querySelector('.selection-header');
+    header.style.opacity = 0.5;
+    const buttonsHTMLCollection = document.getElementsByClassName('selection-btn');
+    buttonsArray = Array.from(buttonsHTMLCollection);
+    buttonsArray.forEach(darkenButton);
+}
+
+function enableBtns() {
+    const header = document.querySelector('.selection-header');
+    header.style.opacity = 1;
+    const buttonsHTMLCollection = document.getElementsByClassName('selection-btn');
+    buttonsArray = Array.from(buttonsHTMLCollection);
+    buttonsArray.forEach(lightenButton);
 }
 
 function displayCounter(){
@@ -132,7 +119,23 @@ function displayCounter(){
         counter.innerHTML = '';
         enableBtns();
     }, 5000);
-    return;
+}
+
+function displayNewGameBtn() {
+    const restartBtn = document.querySelector('.restart-btn');
+    restartBtn.style.opacity = 1;
+    restartBtn.disabled = false;
+    // reload page when new game button is clicked
+    restartBtn.addEventListener('click', function () {
+    userScore = 0;
+    compScore = 0;
+    // fade out scoreboard
+    document.querySelector('.scoreboard').style.opacity = 0;
+    // fade out button
+    restartBtn.style.opacity = 0;
+    restartBtn.style.disabled = true;
+    enableBtns();
+    });
 }
 
 function playRound(playerSelection, computerSelection){
@@ -167,7 +170,7 @@ function playRound(playerSelection, computerSelection){
         setTimeout(function () {
             disableBtns();
             displayNewGameBtn();
-        },5000)
+        }, 5000);
     }
     if (compScore === 3) {
         announce = 'You lose the game! ' + userScore + ' round(s) to ' + compScore + '. Computer Yeezus is too wavy for you!';
@@ -175,7 +178,7 @@ function playRound(playerSelection, computerSelection){
         setTimeout(function () {
             disableBtns();
             displayNewGameBtn();
-        }, 5000)
+        }, 5000);
     }
     // fade in scoreboard after 5 seconds
     setTimeout(function () {
@@ -184,53 +187,47 @@ function playRound(playerSelection, computerSelection){
         document.querySelector('.ye-score').innerHTML = `Ye's score: ${compScore}`;
         document.querySelector('.scoreboard').style.opacity = 1;
     }, 5000);
-    return;
 }
 
-function disableBtns() {
-    let header = document.querySelector('.selection-header');
-    header.style.opacity = 0.5;
-    let buttons = document.getElementsByClassName('selection-btn');
-    for (let i = 0; i < 3; ++i) {
-        // change appearance
-        buttons[i].style.opacity = 0.5;
-        buttons[i].style.cursor = 'default';
-        // disable
-        buttons[i].disabled = true;
-    }
-    return;
+function computerPlay(){
+    // selects random play choice for computer
+    let choiceArray = ["Rock", "Paper", "Scissors"];
+    let randomChoice = choiceArray[Math.floor(Math.random() * choiceArray.length)];
+    return randomChoice;
 }
 
-function enableBtns() {
-    const header = document.querySelector('.selection-header');
-    header.style.opacity = 1;
-    let buttons = document.getElementsByClassName('selection-btn');
-    for (let i = 0; i < 3; ++i) {
-        // change appearance
-        buttons[i].style.opacity = 1;
-        buttons[i].style.cursor = 'pointer';
-        // enable
-        buttons[i].disabled = false;
-    }
-    return;
+function onClickPlayRound(button) {
+    button.addEventListener('click', function (){
+        let selectedButton = this.innerHTML;
+        let computerMove = computerPlay();
+        playRound(selectedButton, computerMove);
+    })
 }
 
-function displayNewGameBtn() {
-    const restartBtn = document.querySelector('.restart-btn');
-    restartBtn.style.opacity = 1;
-    restartBtn.disabled = false;
-    // reload page when new game button is clicked
-    restartBtn.addEventListener('click', function () {
-    userScore = 0;
-    compScore = 0;
-    // fade out scoreboard
-    document.querySelector('.scoreboard').style.opacity = 0;
-    // fade out button
-    restartBtn.style.opacity = 0;
-    restartBtn.style.disabled = true;
-    enableBtns();
-    });
-    // fade out new game button
-    return;
+function onClickDisable(button) {
+    button.addEventListener('click', function() {
+        disableBtns();
+        document.querySelector('.scoreboard').style.opacity = 0;
+    })
 }
 
+function playGame(){
+    const gameInterface = document.querySelector('.game-interface');
+    document.querySelector('.restart-button').disabled = true;
+    displayBear();
+    setTimeout(function(){
+        gameInterface.style.opacity = 1;
+    }, 1000);
+    const buttonsHTMLCollection = (document.getElementsByClassName('selection-btn'));
+    buttonsArray = Array.from(buttonsHTMLCollection);
+    buttonsArray.forEach(onClickDisable);
+    buttonsArray.forEach(onClickPlayRound);
+}
+
+hideBear();
+setTimeout(function () {
+    displayIntro();
+}, 3000);
+setTimeout(function () {
+    playGame();
+}, 21000);
