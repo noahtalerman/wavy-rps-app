@@ -38,16 +38,19 @@ h1,h2,h3,h4,h5,h6{
 .selection-buttons{
     display: flex;
     justify-content: center;
+    margin: 40 0 40 0;
 }
 
 .selection-btn{
     margin: 0 5px 0 5px;
+    width: 140px;
+    padding: 10 0 10 0;
 }
 
 button {
     display: inline-block;
     border: none;
-    outline: 3px solid #111112;
+    outline: 3px solid #D1D1DE;
     padding: 1rem 2rem;
     margin: 0;
     text-decoration: none;
@@ -57,13 +60,13 @@ button {
     font-size: 1rem;
     cursor: pointer;
     text-align: center;
-    transition: outline 0.5s ease-in-out;
-    transition: opacity 0.5s ease-in-out;
+    transition: background 0.5s ease-in-out, opacity 0.5s ease-in-out;
     -webkit-appearance: none;
     -moz-appearance: none;
 }
 button:hover{
-    outline:3px solid #D1D1DE;
+    background: #D1D1DE;
+    color: #111112;
 }
 
 button:focus{
@@ -71,7 +74,9 @@ button:focus{
 }
 
 button:disabled{
-    outline: 3px solid #111112;
+    outline: 3px solid #D1D1DE;
+    background: #111112;
+    color: #D1D1DE;
 }
 
 .counter{
