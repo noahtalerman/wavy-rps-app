@@ -20,7 +20,7 @@ function displayBear() {
     }, 500);
 }
 
-function displayIntro(){
+function displayIntro() {
     let timeLeft = 14;
     let announce;
     const banner = document.querySelector('.intro-header');

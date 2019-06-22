@@ -94,4 +94,6 @@ button:disabled{
 
 .restart-btn{
     opacity: 0;
+    width: 140px;
+    padding: 10 0 10 0;
 }
