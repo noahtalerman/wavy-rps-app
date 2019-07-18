@@ -1,4 +1,4 @@
-# rock-paper-scissors
+# wavy-rock-paper-scissors
 original rock, paper, scissors game  <br>
 designed by Noah Talerman <br>
 front end development by Noah Talerman <br>
