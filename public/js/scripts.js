@@ -1,7 +1,7 @@
 // global object of user's score and computer's score
 let scores = {
-    userScore = 0,
-    compScore = 0
+    userScore: 0,
+    compScore: 0
 }
 
 showHideBear();
