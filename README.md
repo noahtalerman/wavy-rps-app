@@ -1,6 +1,6 @@
 # rock-paper-scissors
-original rock, paper, scissors game
-designed by Noah Talerman
-front end development by Noah Talerman
-hosted on Heroku
+original rock, paper, scissors game  <br>
+designed by Noah Talerman <br>
+front end development by Noah Talerman <br>
+hosted on Heroku <br>
 [CLICK HERE](wavy-rps.herokuapp.com) to visit web app.
