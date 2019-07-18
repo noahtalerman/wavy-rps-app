@@ -3,4 +3,4 @@ original rock, paper, scissors game  <br>
 designed by Noah Talerman <br>
 front end development by Noah Talerman <br>
 hosted on Heroku <br>
-[CLICK HERE](wavy-rps.herokuapp.com) to visit web app.
+[CLICK HERE](www.wavy-rps.herokuapp.com) to visit web app.
