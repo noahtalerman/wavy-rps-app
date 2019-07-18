@@ -1,4 +1,4 @@
-# wavy-rock-paper-scissors [![Image of wavy-rps favicon](/public/images/sqaure-fav.png)](https://wavy-rps.herokuapp.com/)
+# wavy-rock-paper-scissors [![Image of wavy-rps favicon](/public/images/square-fav.png)](https://wavy-rps.herokuapp.com/)
 original rock, paper, scissors game  <br>
 designed by Noah Talerman <br>
 front end development by Noah Talerman <br>
